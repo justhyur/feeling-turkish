@@ -15,16 +15,22 @@ function App() {
     }, 
   };
 
-  const [ eurToTry, setEurToTry ] = useState(1);
+  const [ eurToTry, setEurToTry ] = useState(15.2);
   const [ from, setFrom ] = useState('TL');
   const [ inputValue, setInputValue ] = useState('');
 
   useEffect(()=>{
-    fetch("http://api.exchangeratesapi.io/v1/latest?access_key=70eb484299c2e73a5db14958e7d7d4e0&symbols=TRY")
+    // fetch("http://api.exchangeratesapi.io/v1/latest?access_key=70eb484299c2e73a5db14958e7d7d4e0&symbols=TRY")
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     setEurToTry(json.rates.TRY)
+    //   });
+      fetch("https://freecurrencyapi.net/api/v2/latest?apikey=9bf9d360-7f99-11ec-8def-c9b4c6c8dd33&base_currency=EUR")
       .then((response) => response.json())
       .then((json) => {
-        setEurToTry(json.rates.TRY)
+        setEurToTry(json.data.TRY);
       });
+    
   },[inputValue])
 
   const getFeelsLikeValue = (value) => {
