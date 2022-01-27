@@ -25,7 +25,7 @@ function App() {
       .then((json) => {
         setEurToTry(json.rates.TRY)
       });
-  },[])
+  },[inputValue])
 
   const getFeelsLikeValue = (value) => {
     if(!isNaN(value)){
