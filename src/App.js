@@ -16,6 +16,7 @@ function App() {
   };
 
   const [ eurToTry, setEurToTry ] = useState(1);
+  const [ from, setFrom ] = useState('TL');
   const [ inputValue, setInputValue ] = useState('');
 
   useEffect(()=>{
@@ -32,7 +33,9 @@ function App() {
       const avTurcoOra = avTurcoEur / (50 * 4);
       const avItaloOra = averageSalaries.it.value / (40 * 4);
       const valueEur = value / eurToTry;
-      const result = (avItaloOra * valueEur / avTurcoOra);
+      const resultFromTL = (avItaloOra * valueEur / avTurcoOra);
+      const resultFromEUR = (avItaloOra * value / avTurcoOra)*eurToTry;
+      const result = from === "TL"? resultFromTL : resultFromEUR;
       return Math.round(result*100)/100;
     }else{return ''}
   }
@@ -40,9 +43,25 @@ function App() {
   return (
     <div className="app">
       <h1>Feeling like a Turk 🥺</h1>
-      <label><input type="number" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}}></input> TL</label>
-      <span>feels for a Turk like</span>
-      <span><strong>{getFeelsLikeValue(inputValue)}</strong> EUR</span>
+      {eurToTry != 1 &&
+        <div className="live-change"><strong>Live EUR-TL</strong><br/>1 EUR = {eurToTry} TL</div>
+      }
+      <label>
+        <input type="number" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}}></input>
+        <select className="origin" value={from} onChange={(e)=>{
+          setFrom(e.target.value)
+        }}>
+          <option value="TL">TL</option>
+          <option value="EUR">EUR</option>
+        </select>
+      </label>
+      <span>feels for {from == "TL"? "a Turk" : "an Italian"} like</span>
+      <span><strong>{getFeelsLikeValue(inputValue)}</strong> {from == "TL"? "EUR" : "TL"}
+        {from == "EUR" &&
+          <span> (<strong>{Math.round(getFeelsLikeValue(inputValue)/eurToTry*100)/100}</strong> EUR)</span>
+        }
+      </span>
+      <span>are felt by {from == "TL"? "an Italian" : "a Turk"}.</span>
     </div>
   );
 }
