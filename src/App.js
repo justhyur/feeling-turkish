@@ -6,12 +6,12 @@ import FlagImg from './img/tflag.png'
 function App() {
   const averageSalaries = {
     tr: {
-      value: 5092.19,
+      value: 4956.86,
       currency: "TRY",
       oreSett: 50,
     },
     it: {
-      value: 1494.86,
+      value: 1446.61,
       currency: "EUR",
       oreSett: 40,
     }, 
