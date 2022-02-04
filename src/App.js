@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './App.scss';
 import LoaderImg from './img/loader.gif'
 import FlagImg from './img/tflag.png'
@@ -22,6 +22,8 @@ function App() {
   const [ inputValue, setInputValue ] = useState('');
 
   const [ convertValue, setConvertValue ] = useState('');
+
+  const mainInput = useRef(null);
 
   useEffect(()=>{
     loadConversionData();
@@ -72,7 +74,10 @@ function App() {
         <h1>Feeling Turk</h1>
         <div className="live-change"><strong>Live EUR-TL</strong><br/>1 EUR = {eurToTry} TL</div>
         <label>
-          <input type="number" value={inputValue} onChange={(e)=>{setInputValue(e.target.value)}}></input>
+          <input ref={mainInput} type="number" value={inputValue} inputMode="decimal" 
+            onChange={(e)=>{setInputValue(e.target.value)}}
+            onKeyUp={(e)=>{if(e.key === "Enter"){mainInput.current.blur()}}}
+            ></input>
           <select className="origin" value={from} onChange={(e)=>{
             setFrom(e.target.value)
           }}>
