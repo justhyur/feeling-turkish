@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/feeling-turkish/static/css/main.18a8f559.css",
-    "main.js": "/feeling-turkish/static/js/main.6c237873.js",
-    "static/js/787.a8aa1b3e.chunk.js": "/feeling-turkish/static/js/787.a8aa1b3e.chunk.js",
+    "main.css": "/feeling-turkish/static/css/main.d1b10ee9.css",
+    "main.js": "/feeling-turkish/static/js/main.d0f7c94c.js",
+    "static/media/loader.gif": "/feeling-turkish/static/media/loader.30c0aa7c3e2579d868a6.gif",
+    "static/media/tflag.png": "/feeling-turkish/static/media/tflag.f4a1322e45ba168c3fe2.png",
     "index.html": "/feeling-turkish/index.html",
-    "main.18a8f559.css.map": "/feeling-turkish/static/css/main.18a8f559.css.map",
-    "main.6c237873.js.map": "/feeling-turkish/static/js/main.6c237873.js.map",
-    "787.a8aa1b3e.chunk.js.map": "/feeling-turkish/static/js/787.a8aa1b3e.chunk.js.map"
+    "main.d1b10ee9.css.map": "/feeling-turkish/static/css/main.d1b10ee9.css.map",
+    "main.d0f7c94c.js.map": "/feeling-turkish/static/js/main.d0f7c94c.js.map"
   },
   "entrypoints": [
-    "static/css/main.18a8f559.css",
-    "static/js/main.6c237873.js"
+    "static/css/main.d1b10ee9.css",
+    "static/js/main.d0f7c94c.js"
   ]
 }
