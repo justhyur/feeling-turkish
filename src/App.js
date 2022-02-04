@@ -24,17 +24,7 @@ function App() {
   const [ convertValue, setConvertValue ] = useState('');
 
   useEffect(()=>{
-    // fetch("http://api.exchangeratesapi.io/v1/latest?access_key=70eb484299c2e73a5db14958e7d7d4e0&symbols=TRY")
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     setEurToTry(json.rates.TRY)
-    //   });
-      fetch("https://freecurrencyapi.net/api/v2/latest?apikey=9bf9d360-7f99-11ec-8def-c9b4c6c8dd33&base_currency=EUR")
-      .then((response) => response.json())
-      .then((json) => {
-        setEurToTry(json.data.TRY);
-      });
-    
+    loadConversionData();
   },[]);
 
   useEffect(()=>{
@@ -44,6 +34,15 @@ function App() {
       setConvertValue('');
     }
   },[inputValue]);
+
+  const loadConversionData = () => {
+    setEurToTry(null);
+    fetch("https://freecurrencyapi.net/api/v2/latest?apikey=9bf9d360-7f99-11ec-8def-c9b4c6c8dd33&base_currency=EUR")
+      .then((response) => response.json())
+      .then((json) => {
+        setEurToTry(json.data.TRY);
+      });
+  }
 
   const getFeelsLikeValue = (value) => {
     if(!isNaN(value)){
@@ -69,7 +68,7 @@ function App() {
         </div>
       }
       {eurToTry && <>
-        <img className="flag" src={FlagImg} alt="flag"></img>
+        <img className="flag" src={FlagImg} alt="flag" onClick={loadConversionData}></img>
         <h1>Feeling Turk</h1>
         <div className="live-change"><strong>Live EUR-TL</strong><br/>1 EUR = {eurToTry} TL</div>
         <label>
