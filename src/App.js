@@ -8,12 +8,12 @@ function App() {
     tr: {
       value: 4956.86,
       currency: "TRY",
-      oreSett: 50,
+      oreSett: 48.4,
     },
     it: {
       value: 1446.61,
       currency: "EUR",
-      oreSett: 40,
+      oreSett: 39.5,
     }, 
   };
 
