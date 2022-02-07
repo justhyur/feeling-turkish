@@ -49,7 +49,7 @@ function App() {
     }else{
       setConvertValue('');
     }
-  },[inputValue]);
+  },[inputValue, from]);
 
   const fetchEurToTry = () => {
     if(isOnline){
@@ -77,8 +77,16 @@ function App() {
           setEurToTry(eurtry);
         },250)
         return;
-      } else{ fetchEurToTry(); }
-    } else{ fetchEurToTry(); }
+      } else{ 
+        setTimeout(()=>{
+          fetchEurToTry(); 
+        },250);
+      }
+    } else{ 
+      setTimeout(()=>{
+        fetchEurToTry(); 
+      },250);
+    }
   }
 
   const getFeelsLikeValue = (value) => {
@@ -104,43 +112,44 @@ function App() {
           <img src={LoaderImg} alt="load image"></img>
         </div>
       }
-      {eurToTry && <>
-        <img className={`flag ${isOnline? "''" : "offline"}`} src={FlagImg} alt="flag" 
-          onClick={()=>{if(isOnline)loadConversionData()}}
-        ></img>
-        <h1>Feeling Turk</h1>
-        <div className="live-change"><strong>Live EUR-TL</strong><br/>1 EUR = {eurToTry.val} TL</div>
-        <label>
-          <input ref={mainInput} type="number" value={inputValue} inputMode="decimal" 
-            onChange={(e)=>{setInputValue(e.target.value)}}
-            onKeyUp={(e)=>{if(e.key === "Enter"){mainInput.current.blur()}}}
-            ></input>
-          <select className="origin" value={from} onChange={(e)=>{
-            setFrom(e.target.value)
-          }}>
-            <option value="TL">TL</option>
-            <option value="EUR">EUR</option>
-          </select>
-        </label>
-        {inputValue.toString().length > 0 && <>
-          <span className="margin-top">are actually</span>
-          <span><strong>{from == "TL"? `${Math.round(convertValue*100)/100}` : `${Math.round(convertValue*100)/100}`}</strong> {from == "TL"? "EUR" : "TL"}</span>
-          <span className="but">BUT</span>
-          <span>it feels for {from == "TL"? "a Turk" : "an Italian"} like</span>
-          <span><strong>{approx(getFeelsLikeValue(inputValue))}</strong> {from == "TL"? "EUR" : "TL"}
-            {from == "EUR" &&
-              <span> (<strong>{approx(getFeelsLikeValue(inputValue)/eurToTry.val)}</strong> EUR)</span>
-            }
-            {from == "TL" &&
-              <span> (<strong>{approx(getFeelsLikeValue(inputValue)*eurToTry.val)}</strong> TL)</span>
-            }
-          </span>
-          <span>are felt by {from == "TL"? "an Italian" : "a Turk"}.</span>
-          <span className="margin-top">Life in Turkey is</span>
-          <span>{approx(getFeelsLikeValue(inputValue)/convertValue)} <i>times</i></span>
-          <span>cheaper than Italy.</span>
-        </>}
-      </>
+      {eurToTry && 
+        <main>
+          <img className={`flag ${isOnline? "''" : "offline"}`} src={FlagImg} alt="flag" 
+            onClick={()=>{if(isOnline)loadConversionData()}}
+          ></img>
+          <h1>Feeling Turk</h1>
+          <div className="live-change"><strong>Live EUR-TL</strong><br/>1 EUR = {eurToTry.val} TL</div>
+          <label>
+            <input ref={mainInput} type="number" value={inputValue} inputMode="decimal" 
+              onChange={(e)=>{setInputValue(e.target.value)}}
+              onKeyUp={(e)=>{if(e.key === "Enter"){mainInput.current.blur()}}}
+              ></input>
+            <select className="origin" value={from} onChange={(e)=>{
+              setFrom(e.target.value)
+            }}>
+              <option value="TL">TL</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </label>
+          {inputValue.toString().length > 0 && <>
+            <span className="margin-top">are actually</span>
+            <span><strong>{from == "TL"? `${Math.round(convertValue*100)/100}` : `${Math.round(convertValue*100)/100}`}</strong> {from == "TL"? "EUR" : "TL"}</span>
+            <span className="but">BUT</span>
+            <span>it feels for {from == "TL"? "a Turk" : "an Italian"} like</span>
+            <span><strong>{approx(getFeelsLikeValue(inputValue))}</strong> {from == "TL"? "EUR" : "TL"}
+              {from == "EUR" &&
+                <span> (<strong>{approx(getFeelsLikeValue(inputValue)/eurToTry.val)}</strong> EUR)</span>
+              }
+              {from == "TL" &&
+                <span> (<strong>{approx(getFeelsLikeValue(inputValue)*eurToTry.val)}</strong> TL)</span>
+              }
+            </span>
+            <span>are felt by {from == "TL"? "an Italian" : "a Turk"}.</span>
+            <span className="margin-top">Life in Turkey is</span>
+            <span>{approx(getFeelsLikeValue(inputValue)/convertValue)} <i>times</i></span>
+            <span>cheaper than Italy.</span>
+          </>}
+        </main>
       }
     </div>
   );
